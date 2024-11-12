@@ -39,9 +39,21 @@ app.get("/janken", (req, res) => {
   else cpu = 'パー';
   // ここに勝敗の判定を入れる
   // 今はダミーで人間の勝ちにしておく
-  let judgement = '勝ち';
-  win += 1;
-  total += 1;
+  let judgement = ''; // 勝敗の結果を格納する変数
+  total += 1;         // 総試合数は毎回増加
+  
+  if (hand === cpu) {
+    judgement = 'あいこ';
+  } else if (
+    (hand === 'グー' && cpu === 'チョキ') ||
+    (hand === 'チョキ' && cpu === 'パー') ||
+    (hand === 'パー' && cpu === 'グー')
+  ) {
+    judgement = '勝ち';
+    win += 1; // ユーザーが勝った場合、勝利数を増加
+  } else {
+    judgement = '負け';
+  }
   const display = {
     your: hand,
     cpu: cpu,
@@ -52,6 +64,34 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
-app.get()
+app.get("/docchinote", (req, res) => {
+  let choice = req.query.choice;
+  let win = Number(req.query.win);
+  let total = Number(req.query.total);
+  console.log({choice, win, total});
+  const num = Math.floor(Math.random() * 2 + 1);
+  let cpu = '';
+  if (num == 1) cpu = '左手';
+  else cpu = '右手';
+
+  let judgement = ''; // 勝敗の結果を格納する変数
+  total += 1;         // 総試合数は毎回増加
+  
+  if (choice === cpu) {
+    judgement = '当たり';
+    win += 1; // ユーザーが勝った場合、勝利数を増加
+  } else {
+    judgement = 'ハズレ';
+  }
+  
+  // displayオブジェクトに送るデータを更新
+const display = {
+  your: choice,
+  cpu: cpu,
+  judgement: judgement,
+  win: win,
+  total: total
+};
+});
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
