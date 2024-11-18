@@ -64,20 +64,17 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
-app.get("/docchinote", (req, res) => {
-  let choice = req.query.choice;
+app.get("/dochinote", (req, res) => {
   let win = Number(req.query.win);
   let total = Number(req.query.total);
   console.log({choice, win, total});
-  const num = Math.floor(Math.random() * 2 + 1);
-  let cpu = '';
-  if (num == 1) cpu = '左手';
-  else cpu = '右手';
 
+  if( req.query.radio1 ) selected = "あたり";
+  if( req.query.radio2 ) selected = "ハズレ";
   let judgement = ''; // 勝敗の結果を格納する変数
   total += 1;         // 総試合数は毎回増加
   
-  if (choice === cpu) {
+  if (choice === radio1) {
     judgement = '当たり';
     win += 1; // ユーザーが勝った場合、勝利数を増加
   } else {
@@ -92,7 +89,16 @@ const display = {
   win: win,
   total: total
 };
-  res.render('docchinote', display);
 });
+
+app.get("/test", (req, res) => {
+  let selected = 0;
+  if( req.query.radio1 ) selected = "350円";
+  if( req.query.radio2 ) selected = "300円";
+  if( req.query.radio3 ) selected = "50円";
+
+});
+
+
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
