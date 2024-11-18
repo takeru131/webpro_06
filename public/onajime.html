@@ -3,22 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>相手と同じ目を当てろ！</title>
+    <title>相手と同じ目を出せ！</title>
 </head>
 <body>
-    <h1>相手と同じ目を当てろ！</h1>
-    <button onclick="random()">サイコロを振る</button>
-    <p>サイコロの目: <span id="saikoro">-</span></p>
+    <h1>サイコロタイム</h1>
 
-    <script type="text/javascript">
-        function random() {
-            // 1から6までのランダムな数字を生成
-            var num = Math.floor(Math.random() * 6 + 1);
-            // サイコロの結果をHTMLに反映
-            document.getElementById("saikoro").textContent = num;
+    <button onclick="playGame()">サイコロを振る</button>
+
+    <p>あなたのサイコロ: <span id="yourDice">-</span></p>
+    <p>相手のサイコロ: <span id="enemyDice">-</span></p>
+    <p>結果: <span id="result">-</span></p>
+
+    <script>
+        async function playGame() {
+            // 自分と敵のサイコロの目をランダム生成
+            const yourDice = Math.floor(Math.random() * 6) + 1;
+            const enemyDice = Math.floor(Math.random() * 6) + 1;
+
+            // サイコロの目を画面に表示
+            document.getElementById('yourDice').textContent = yourDice;
+            document.getElementById('enemyDice').textContent = enemyDice;
+
+            // サーバーにデータを送信
+            const response = await fetch('/roll-dice', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ yourDice, enemyDice })
+            });
+
+            // サーバーからの結果を取得して表示
+            const data = await response.json();
+            document.getElementById('result').textContent = data.result;
         }
     </script>
 </body>
 </html>
-
-
