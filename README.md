@@ -49,24 +49,7 @@ loose --> end1
 ```
 
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>学食値段クイズ</title>
-</head>
-<body>
-    <form action="/test" method="get">
-        <input type="radio" name="radio1" id="radio1">
-        <label for="radio1">唐揚丼</label><br>
-        <input type="radio" name="radio2" id="radio2">
-        <label for="radio1">カレーうどん</label><br>
-        <input type="radio" name="radio3" id="radio3">
-        <label for="radio1">味噌汁</label><br>
-        <input type="submit" value="送信">
-    </form>
-</body>
-</html>
+
 
 ### どっちの手に入ってるかクイズ
 
@@ -88,20 +71,3 @@ win --> end1
 if -->|no| loose
 loose --> end1
 ```
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>どっちの手に入ってるか</title>
-</head>
-<body>
-    <form action="/test" method="get">
-        <input type="radio" name="radio1" id="radio1">
-        <label for="radio1">右手</label><br>
-        <input type="radio" name="radio2" id="radio2">
-        <label for="radio1">左手</label><br>
-        <input type="submit" value="勝負">
-    </form>
-</body>
-</html>
