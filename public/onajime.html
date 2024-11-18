@@ -2,22 +2,23 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>相手と同じ目を当てろ！</title>
 </head>
 <body>
-    <form action="/onajime">
-        <form><input type="button" value="サイコロ" onClick="random()">
-            <span id="saikoro">senter</span></form>
-            
-            <script type="text/javascrip
-            [rakuten:book:18087464:detail]
-            t">
-            function random() {
-            var num = Math.floor( Math.random() * 6 + 1 ) ; //サイコロの目の生成
-            document.getElementById("saikoro").innerHTML = num; //サイコロの目の出力
-            }
-            </script>
-    </form>
+    <h1>相手と同じ目を当てろ！</h1>
+    <button onclick="random()">サイコロを振る</button>
+    <p>サイコロの目: <span id="saikoro">-</span></p>
+
+    <script type="text/javascript">
+        function random() {
+            // 1から6までのランダムな数字を生成
+            var num = Math.floor(Math.random() * 6 + 1);
+            // サイコロの結果をHTMLに反映
+            document.getElementById("saikoro").textContent = num;
+        }
+    </script>
 </body>
 </html>
+
 
