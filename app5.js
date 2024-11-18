@@ -80,29 +80,30 @@ app.get("/dochinote", (req, res) => {
     judgement = 'ハズレ';
   }
   
-  // displayオブジェクトに送るデータを更新
-const display = {
-  your: choice,
-  cpu: cpu,
-  judgement: judgement,
-  win: win,
-  total: total
-};
+  res.render("dochinote", { choice, judgement});
 });
 
 app.get("/onajime", (req, res) => {
-  const userDice = Math.floor(Math.random() * 6 + 1);
-  const enemyDice = Math.floor(Math.random() * 6 + 1);
-  let result = "";
 
-  if (userDice == enemyDice) {
-    result = "勝利！";
-  } else {
-    result = "負け";
-  }
+    // 自分と敵のサイコロの目をランダムに生成
+    const yourDice = Math.floor(Math.random() * 6) + 1;
+    const enemyDice = Math.floor(Math.random() * 6) + 1;
 
-  res.render("dice", { userDice, enemyDice, result });
+    // 勝敗判定
+    let result = '';
+    if (yourDice == enemyDice) {
+        result = '同じ目が出ました！あなたの勝ち！';
+      } else {
+        result = '敵の勝ち！';
+      }
+    // 結果を result.ejs に渡してレンダリング
+    res.render('onajime', { yourDice, enemyDice, result });
 });
+
+
+
+
+  
 
 
 
