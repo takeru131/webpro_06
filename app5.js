@@ -63,10 +63,9 @@ app.get("/janken", (req, res) => {
   }
   res.render( 'janken', display );
 });
-
+//どっちの手に入ってるかゲーム
 app.get("/dochinote", (req, res) => {
-  let win = Number(req.query.win);
-  let total = Number(req.query.total);
+
   console.log({choice, win, total});
 
   if( req.query.radio1 ) selected = "あたり";
@@ -91,12 +90,18 @@ const display = {
 };
 });
 
-app.get("/test", (req, res) => {
-  let selected = 0;
-  if( req.query.radio1 ) selected = "350円";
-  if( req.query.radio2 ) selected = "300円";
-  if( req.query.radio3 ) selected = "50円";
+app.get("/onajime", (req, res) => {
+  const userDice = Math.floor(Math.random() * 6 + 1);
+  const enemyDice = Math.floor(Math.random() * 6 + 1);
+  let result = "";
 
+  if (userDice == enemyDice) {
+    result = "勝利！";
+  } else {
+    result = "負け";
+  }
+
+  res.render("dice", { userDice, enemyDice, result });
 });
 
 
