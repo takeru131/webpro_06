@@ -1,0 +1,13 @@
+.cover {
+    border-bottom: 1px solid #c0c0c0;
+    margin: 3px;
+}
+
+.name {
+    font-weight: bold;
+    width: 8em;
+}
+
+.mes {
+    margin-left: 30px;
+}
