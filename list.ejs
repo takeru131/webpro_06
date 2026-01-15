@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>家計簿</title>
+</head>
+<body>
+    <h1>家計簿一覧</h1>
+    <a href="/account/create">新規追加</a> | <a href="/">メニューへ戻る</a>
+    <hr>
+    <table border="1">
+        <tr>
+            <th>日付</th>
+            <th>品目</th>
+            <th>金額</th>
+        </tr>
+        <% accounts.forEach(acc => { %>
+        <tr>
+            <td><%= acc.date %></td>
+            <td><%= acc.item %></td>
+            <td><%= acc.amount %>円</td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
